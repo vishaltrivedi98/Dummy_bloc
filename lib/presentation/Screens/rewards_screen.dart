@@ -65,15 +65,17 @@ class RewardScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Image.asset(
-                      _headerImage(state.selectedTab),
-                      fit: BoxFit.fill,
-                      width: double.infinity,
-                      height: 200,
-                    ),
+                    borderRadius: BorderRadius.circular(5),
+                    child: RewardHeader(tab: state.selectedTab),
+
+                    // Image.asset(
+                    //   _headerImage(state.selectedTab),
+                    //   fit: BoxFit.fill,
+                    //   width: double.infinity,
+                    //   height: 200,
+                    // ),
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -124,11 +126,11 @@ class RewardScreen extends StatelessWidget {
   Widget _buildTab(RewardsState state) {
     switch (state.selectedTab) {
       case RewardTab.carrots:
-        return CarrotList(items: state.carrots);
+        return const CarrotScreen(); // ✅ API + Bloc
       case RewardTab.tulips:
-        return TulipList(items: state.tulips);
+        return TulipList(items: state.tulips); // ✅ STATIC
       case RewardTab.voucher:
-        return VoucherList(items: state.vouchers);
+        return VoucherList(items: state.vouchers); // ✅ STATIC
     }
   }
 
@@ -153,4 +155,251 @@ class RewardScreen extends StatelessWidget {
         return 'assets/vouchers_header.png';
     }
   }
+}
+
+class RewardHeader extends StatelessWidget {
+  final RewardTab tab;
+
+  const RewardHeader({super.key, required this.tab});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(5),
+        child: Container(
+          height: 200,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: _gradient(tab),
+          ),
+          child: _content(tab),
+        ),
+      ),
+    );
+  }
+
+  // 🎨 GRADIENTS
+  LinearGradient _gradient(RewardTab tab) {
+    switch (tab) {
+      case RewardTab.carrots:
+        return const LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [
+            Color(0xFFFFDA58),
+            Color(0xFFF7EF8A),
+            Color(0xFFFEC537),
+            Color(0xFFEDC968),
+          ],
+        );
+
+      case RewardTab.tulips:
+        return const LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [
+            Color(0xFFF56158),
+            Color(0xFFFB8D66),
+          ],
+        );
+
+      case RewardTab.voucher:
+        return const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFFC67AFF),
+            Color(0xFFFD7AA9),
+            Color(0xFFFFB173),
+          ],
+        );
+    }
+  }
+
+  // 🧩 CONTENT
+  Widget _content(RewardTab tab) {
+    switch (tab) {
+      case RewardTab.carrots:
+        return _carrotContent();
+
+      case RewardTab.tulips:
+        return _tulipContent();
+
+      case RewardTab.voucher:
+        return _voucherContent();
+    }
+  }
+}
+
+Widget _carrotContent() {
+  return Padding(
+    padding: const EdgeInsets.only(top: 22, bottom: 17, right: 35, left: 22),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              "Carrots Available",
+              style: GoogleFonts.lexend(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xff070707)),
+            ),
+            const SizedBox(height: 3),
+            Row(
+              children: [
+                Image.asset("assets/carrot_img.png"),
+                const SizedBox(width: 2),
+                Text(
+                  "300",
+                  style: GoogleFonts.lexend(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              "Get Rs from XY Carrots",
+              style: GoogleFonts.lexend(
+                  fontSize: 14,
+                  color: Color(0xffB16835),
+                  fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              "• Minimum 3000 XY carrots are required \n  to redeem coins",
+              style: GoogleFonts.lexend(
+                  fontSize: 11, color: Colors.red, fontWeight: FontWeight.w400),
+            ),
+          ],
+        ),
+        Image.asset(
+          'assets/carrotts.png', // bunny image
+          height: 165,
+          width: 115,
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _tulipContent() {
+  return Center(
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: const [
+        _ActionIcon(title: "Watch\nTeaser", icon: Icons.play_circle),
+        _ActionIcon(title: "Earn\nTulips", icon: Icons.local_florist),
+        _ActionIcon(title: "Redeem\nAt Venue", icon: Icons.store),
+      ],
+    ),
+  );
+}
+
+class _ActionIcon extends StatelessWidget {
+  final String title;
+  final IconData icon;
+
+  const _ActionIcon({required this.title, required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        CircleAvatar(
+          radius: 26,
+          backgroundColor: Colors.white.withOpacity(0.2),
+          child: Icon(icon, color: Colors.white),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          title,
+          textAlign: TextAlign.center,
+          style: GoogleFonts.lexend(
+            fontSize: 11,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+Widget _voucherContent() {
+  return Padding(
+    padding: const EdgeInsets.only(top: 16, right: 30, left: 30),
+    child: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Vouchers Available",
+                  style: GoogleFonts.lexend(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "12",
+                  style: GoogleFonts.lexend(
+                    color: Colors.white,
+                    fontSize: 32,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  "Get discounts using vouchers",
+                  style: GoogleFonts.lexend(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400),
+                ),
+                // const SizedBox(height: 12),
+              ],
+            ),
+            Image.asset(
+              'assets/voucchaar.png',
+              height: 120,
+              width: 140,
+              fit: BoxFit.fill,
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          "1 Voucher ₹200 OFF",
+          style: GoogleFonts.lexend(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+
+        // Image.asset(
+        //   'assets/voucchaar.png',
+        //   height: 100,
+        // ),
+      ],
+    ),
+  );
 }

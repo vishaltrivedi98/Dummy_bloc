@@ -34,11 +34,11 @@ class _TulipCard extends StatelessWidget {
         color: isGreen ? const Color(0xffE2F0D9) : const Color(0xffEFEFF4),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Row(
+      child: Padding(
+        padding: const EdgeInsets.all(13),
+        child: Column(
+          children: [
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // IMAGE
@@ -46,133 +46,182 @@ class _TulipCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   child: Image.asset(
                     'assets/Image.png',
-                    width: 48,
-                    height: 48,
+                    width: 38,
+                    height: 38,
                     fit: BoxFit.cover,
                   ),
                 ),
                 const SizedBox(width: 10),
 
                 // CONTENT
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                Container(
+                  width: 680,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // TITLE + HISTORY
-                      Row(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                         children: [
-                          Expanded(
-                            child: Text(
-                              item.title,
-                              style: GoogleFonts.lexend(
+                          Text(
+                            item.title,
+                            style: GoogleFonts.lexend(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14,
-                              ),
+                                color: Color(0xff070707)),
+                          ),
+                          Text(
+                            item.location,
+                            style: GoogleFonts.lexend(
+                              fontSize: 12,
+                              color: Colors.black54,
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                backgroundColor: Colors.transparent,
-                                builder: (_) => const TulipsHistorySheet(),
-                              );
-                            },
-                            child: Image.asset(
-                              "assets/history.png",
-                              height: 18,
-                            ),
-                          )
+
+                          // TITLE + HISTORY
+
+                          const SizedBox(height: 2),
+
+                          // LOCATION
+
+                          const SizedBox(height: 6),
+
+                          // EARNED + BALANCE
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Column(
+                          //       crossAxisAlignment: CrossAxisAlignment.start,
+                          //       children: [
+                          //         Text(
+                          //           'Earned ${item.earned} Tulips',
+                          //           style: GoogleFonts.lexend(
+                          //             fontWeight: FontWeight.w500,
+                          //           ),
+                          //         ),
+                          //         const SizedBox(height: 2),
+                          //         Text(
+                          //           item.time,
+                          //           style: GoogleFonts.lexend(
+                          //             fontSize: 11,
+                          //             color: Colors.black54,
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //     Column(
+                          //       crossAxisAlignment: CrossAxisAlignment.end,
+                          //       children: [
+                          //         Text(
+                          //           '${item.balance} Tulips',
+                          //           style: GoogleFonts.lexend(
+                          //             fontSize: 14,
+                          //             fontWeight: FontWeight.w600,
+                          //           ),
+                          //         ),
+                          //         const SizedBox(height: 2),
+                          //         const Text(
+                          //           'Balance',
+                          //           style: TextStyle(
+                          //             fontSize: 11,
+                          //             color: Colors.black54,
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ],
+                          // ),
                         ],
                       ),
-
-                      const SizedBox(height: 2),
-
-                      // LOCATION
-                      Text(
-                        item.location,
-                        style: GoogleFonts.lexend(
-                          fontSize: 12,
-                          color: Colors.black54,
+                      GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            builder: (_) => const TulipsHistorySheet(),
+                          );
+                        },
+                        child: Image.asset(
+                          "assets/history.png",
+                          height: 18,
                         ),
-                      ),
-
-                      const SizedBox(height: 6),
-
-                      // EARNED + BALANCE
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Earned ${item.earned} Tulips',
-                                style: GoogleFonts.lexend(
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              const SizedBox(height: 2),
-                              Text(
-                                item.time,
-                                style: GoogleFonts.lexend(
-                                  fontSize: 11,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                '${item.balance} Tulips',
-                                style: GoogleFonts.lexend(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const SizedBox(height: 2),
-                              const Text(
-                                'Balance',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
                       ),
                     ],
                   ),
                 ),
               ],
             ),
-          ),
-
-          // ACTION BAR
-          Container(
-            height: 30,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color:
-                  isGreen ? const Color(0xff38C757) : const Color(0xff6B63E6),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Earned ${item.earned} Tulips',
+                      style: GoogleFonts.lexend(
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      item.time,
+                      style: GoogleFonts.lexend(
+                        fontSize: 11,
+                        color: Colors.black54,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '${item.balance} Tulips',
+                      style: GoogleFonts.lexend(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    const Text(
+                      'Balance',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.black54,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            alignment: Alignment.center,
-            child: Text(
-              item.action,
-              style: GoogleFonts.lexend(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-                fontSize: 11,
+            // ACTION BAR
+            SizedBox(
+              height: 15,
+            ),
+            Container(
+              height: 30,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color:
+                    isGreen ? const Color(0xff38C757) : const Color(0xff6B63E6),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                item.action,
+                style: GoogleFonts.lexend(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 11,
+                ),
               ),
             ),
-          ),
 
-          const SizedBox(height: 20),
-        ],
+            const SizedBox(height: 10),
+          ],
+        ),
       ),
     );
   }

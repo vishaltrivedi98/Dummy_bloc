@@ -29,8 +29,8 @@ class _VoucherCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 14),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xffEFEFF4),
-        borderRadius: BorderRadius.circular(12),
+        color: Colors.white30,
+        borderRadius: BorderRadius.circular(7),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,8 +46,10 @@ class _VoucherCard extends StatelessWidget {
                       children: [
                         Text(
                           item.title,
-                          style:
-                              GoogleFonts.lexend(fontWeight: FontWeight.w600),
+                          style: GoogleFonts.lexend(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              color: Color(0xff070707)),
                         ),
                         const SizedBox(width: 6),
                         const Icon(Icons.info_outline,
@@ -58,30 +60,52 @@ class _VoucherCard extends StatelessWidget {
                     Text(
                       item.value,
                       style: GoogleFonts.lexend(
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xff4A5AEF),
+                        color: const Color(0xff4F46E5),
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 42,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff4A5AEF),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6)),
-                  ),
-                  child: Text(
-                    'Claim',
-                    style:
-                        GoogleFonts.lexend(fontSize: 18, color: Colors.white),
-                  ),
+              Container(
+                width: 74,
+                height: 38,
+                decoration: BoxDecoration(
+                  color: Color(0xff4A5AEF),
+                  borderRadius: BorderRadius.circular(3),
                 ),
-              ),
+                child: Center(
+                    child: Text(
+                  "Claim",
+                  style: GoogleFonts.lexend(
+                      fontSize: 13,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600),
+                )),
+              )
+
+              // SizedBox(
+              //   height: 38,
+              //   width: 70,
+              //   child: ElevatedButton(
+              //     onPressed: () {},
+              //     style: ElevatedButton.styleFrom(
+              //       backgroundColor: const Color(0xff4A5AEF),
+              //       shape: RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.circular(4)),
+              //     ),
+              //     child: Center(
+              //       child: Text(
+              //         'Claim',
+              //         style: GoogleFonts.lexend(
+              //             fontSize: 13,
+              //             color: Colors.white,
+              //             fontWeight: FontWeight.w600),
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
           const SizedBox(height: 8),
@@ -95,7 +119,7 @@ class _VoucherCard extends StatelessWidget {
             style: GoogleFonts.lexend(
               fontSize: 13,
               fontWeight: FontWeight.w500,
-              color: const Color(0xff4A5AEF),
+              color: const Color(0xff7464E4),
             ),
           ),
         ],

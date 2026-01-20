@@ -39,6 +39,7 @@ dependencies:
   flutter_riverpod: ^2.6.1
   google_fonts: 
   flutter_bloc: ^9.1.1
+  dio:
 
 dev_dependencies:
   flutter_test:

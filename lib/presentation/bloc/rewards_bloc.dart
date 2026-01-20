@@ -11,16 +11,16 @@ class RewardsBloc extends Bloc<RewardsEvent, RewardsState> {
       : super(
           RewardsState(
             selectedTab: RewardTab.carrots,
-            carrots: [],
+            carrots: [], // 👈 EMPTY
             tulips: [],
             vouchers: [],
           ),
         ) {
     on<LoadRewardsEvent>((event, emit) {
       emit(state.copyWith(
-        carrots: repository.getCarrots(),
-        tulips: repository.getTulips(),
-        vouchers: repository.getVouchers(),
+        // ❌ REMOVE carrots
+        tulips: repository.getTulips(), // ✅ STATIC
+        vouchers: repository.getVouchers(), // ✅ STATIC
       ));
     });
 

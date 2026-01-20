@@ -3,16 +3,16 @@ import 'package:dummy/domain/tulip_entity.dart';
 import 'package:dummy/domain/voucher_entity.dart';
 
 class RewardRepository {
-  List<CarrotEntity> getCarrots() {
-    return [
-      CarrotEntity(title: 'Book A Table', value: '-250', positive: false),
-      CarrotEntity(title: 'Corporate Bonus', value: '+500', positive: true),
-      CarrotEntity(title: 'Group Booking', value: '-250', positive: false),
-      CarrotEntity(title: 'Book A Table', value: '-250', positive: false),
-      CarrotEntity(title: 'Book A Table', value: '-250', positive: false),
-      CarrotEntity(title: 'Corporate Bonus', value: '+500', positive: true),
-    ];
-  }
+  // List<CarrotEntity> getCarrots() {
+  //   return [
+  //     CarrotEntity(title: 'Book A Table', value: '-250', positive: false),
+  //     CarrotEntity(title: 'Corporate Bonus', value: '+500', positive: true),
+  //     CarrotEntity(title: 'Group Booking', value: '-250', positive: false),
+  //     CarrotEntity(title: 'Book A Table', value: '-250', positive: false),
+  //     CarrotEntity(title: 'Book A Table', value: '-250', positive: false),
+  //     CarrotEntity(title: 'Corporate Bonus', value: '+500', positive: true),
+  //   ];
+  // }
 
   List<TulipEntity> getTulips() {
     return [
